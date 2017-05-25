@@ -1,0 +1,35 @@
+<!doctype html>
+<html id="settings">
+
+<head>
+  <title>Medium Blog Chrome Extension Options</title>
+  <!-- build:css /app.css -->
+  <link rel="stylesheet" href="./css/app.css"></link>
+  <!-- endbuild -->
+</head>
+
+<body>
+  <div class="container">
+    <h1>Settings</h1>
+
+    <label for="accessToken">Your Medium Integration Token</label>
+    <input type="text" id="accessToken"></input>
+
+    <label for="userId">Your Medium User Id (will be fetched)</label>
+    <input type="text" id="userId" disabled></input>
+
+    <input type="button" id="btnSave" value="Save" />
+    <input type="button" id="btnReset" value="Reset" />
+
+    <div>
+      <pre id="status"></pre>
+    </div>
+  </div>
+
+  <!-- build:js /settings.js -->
+  <script src="./js/settingsClass.js"></script>
+  <script src="./js/app.js"></script>
+  <!-- endbuild -->
+</body>
+
+</html>
