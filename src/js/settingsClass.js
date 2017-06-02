@@ -3,7 +3,7 @@
 class SettingsClass {
   constructor() {
     let self = this;
-    
+
     this.data = {
       userId: '',
       accessToken: '',
@@ -51,7 +51,7 @@ class SettingsClass {
     let self = this;
 
     return new Promise(function (resolve, reject) {
-      let obj =  self.data;
+      let obj = self.data;
       chrome.storage.sync.set(obj, function () {
         if (chrome.runtime.error) {
           reject(chrome.runtime.error)

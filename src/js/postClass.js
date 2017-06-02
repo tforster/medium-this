@@ -105,9 +105,11 @@ class Post {
       chrome.tabs.executeScript({
         code: "var selection, range, clone, div;selection = window.getSelection();range = selection.getRangeAt(0);clone = range.cloneContents();div=document.createElement('div');div.appendChild(clone);div.innerHTML"
       }, function (range) {
-        if (range) {
+        if (range && range[0] !== null) {
           let gfm = toMarkdown(range[0], { gfm: true });
           self.page.selection = gfm;
+        } else {
+          self.page.selection = '';
         }
         resolve('getSelection');
       });

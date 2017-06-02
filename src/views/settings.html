@@ -2,7 +2,7 @@
 <html id="settings">
 
 <head>
-  <title>Medium Blog Chrome Extension Options</title>
+  <title>New Post: Medium This Chrome Extension</title>
   <!-- build:css /app.css -->
   <link rel="stylesheet" href="./css/app.css"></link>
   <!-- endbuild -->
@@ -12,11 +12,29 @@
   <div class="container">
     <h1>Settings</h1>
 
-    <label for="accessToken">Your Medium Integration Token</label>
+    <p>Medium This requires access to your Medium account. This is done via a revokable token that you control.</p>
+    <p>After you have logged in to your Medium account go to your <a href="https://medium.com/me/settings">settings</a> page
+      and scroll down to the section "Integration tokens". Enter a description such as "Medium This", click "Get integration
+      token" and paste a copy of the new token below.</p>
+    <p>You can revoke the token at any time on your settings page and this extension will be immediately deactivated.</p>
+
+    <label for="accessToken">Medium Integration Token</label>
     <input type="text" id="accessToken"></input>
 
     <label for="userId">Your Medium User Id (will be fetched)</label>
     <input type="text" id="userId" disabled></input>
+
+    <p>Default settings</p>
+
+    <label for="notifyFollowers">Notify Followers</label>
+    <input type="checkbox" id="notifyFollowers"></input>
+    <br/>
+
+    <label for="publishStatus">Publish Status:</label>
+    <input type="radio" name="publishStatus" value="draft" id="rbDraft" checked><label for="rbDraft">Draft</label></input>
+    <input type="radio" name="publishStatus" value="publish" id="rbPublish"><label for="rbPublish">Publish</label></input>
+    <input type="radio" name="publishStatus" value="unlisted" id="rbUnlisted"><label for="rbUnlisted">Unlisted</label></input>
+    <br/><br/>
 
     <input type="button" id="btnSave" value="Save" />
     <input type="button" id="btnReset" value="Reset" />
@@ -26,10 +44,9 @@
     </div>
   </div>
 
-  <!-- build:js /settings.js -->
-  <script src="./js/settingsClass.js"></script>
-  <script src="./js/app.js"></script>
-  <!-- endbuild -->
+  <!-- Do not attemp to minify JS yet. UglifyJS is not supporting ES6 yet. -->
+  <script src="/js/settingsClass.js"></script>
+  <script src="/js/app.js"></script>
 </body>
 
 </html>

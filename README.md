@@ -1,4 +1,4 @@
-# Medium This 0.1.0
+# Medium This 0.1.0.beta
 
 _A Chrome extension to save URLs and page content as drafts to your Medium Blog_
 
@@ -30,12 +30,16 @@ from [https://medium.com/me/settings](https://medium.com/me/settings).
 
 # Roadmap
 
-* Switch integration tokens for more robust oAuth2
-* Allow user to choose draft or publish as default behaviour
 * Synchronize tags with those already on the users Medium blog
 * Improve gulp build tasks to support minification of ES6 syntax
 
 # Change Log
+
+0.1.0.beta: Prepared for Chrome Store submission (2017-06-02)
+* Support for default options in settings window
+* Changed content editable div for textarea
+* Added GA to track form pages
+* `gulp build --target stage` minifies now. _With the exception of JS since UglifyJS is not supporting ES6 yet._ Stage is synonymous with prod for this project.
 
 0.1.0: Initial Release and early MVP (2017-05-25)
 * Posts a source URL from the current page to a Medium draft

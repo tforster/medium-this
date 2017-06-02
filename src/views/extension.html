@@ -1,9 +1,9 @@
 <!doctype html>
-<html id="popup">
+<html id="extension">
 
 <head>
-  <title>Medium Blog Chrome Extension</title>
-    <!-- build:css /app.css -->
+  <title>Settings: Medium This Chrome Extension</title>
+  <!-- build:css /app.css -->
   <link rel="stylesheet" href="./css/app.css"></link>
   <!-- endbuild -->
 </head>
@@ -15,8 +15,21 @@
     <label for="title">Title</label>
     <input type="text" id="title"></input>
 
-    <label for="selection">Content</label>
-    <div id="selection" contenteditable></div>
+    <label for="selection">Content (click to edit, Markdown is acceptable)</label>
+    <textarea id="selection"></textarea>
+
+    <label for="tags">Tags (up to three, comma separated)</label>
+    <input type="text" id="tags"></input>
+
+    <label for="notifyFollowers">Notify Followers</label>
+    <input type="checkbox" id="notifyFollowers"></input>
+    <br/>
+
+    <label for="publishStatus">Publish Status:</label>
+    <input type="radio" name="publishStatus" value="draft" id="rbDraft" checked><label for="rbDraft">Draft</label></input>
+    <input type="radio" name="publishStatus" value="publish" id="rbPublish"><label for="rbPublish">Publish</label></input>
+    <input type="radio" name="publishStatus" value="unlisted" id="rbUnlisted"><label for="rbUnlisted">Unlisted</label></input>
+    <br/><br/>
 
     <input type="button" id="btnSave" value="Save"></input>
     <input type="button" id="btnClose" value="Close"></input>
@@ -27,12 +40,12 @@
     </div>
 
   </div>
-  <!-- build:js /settings.js -->
-  <script src="./js/settingsClass.js"></script>
-  <script src="./js/postClass.js"></script>
-  <script src="./js/to-markdown.js"></script>
-  <script src="./js/app.js"></script>
-  <!-- endbuild -->
+
+  <!-- Do not attemp to minify JS yet. UglifyJS is not supporting ES6 yet. -->
+  <script src="/js/settingsClass.js"></script>
+  <script src="/js/postClass.js"></script>
+  <script src="/js/to-markdown.js"></script>
+  <script src="/js/app.js"></script>
 </body>
 
 </html>

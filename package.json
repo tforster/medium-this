@@ -1,6 +1,6 @@
 {
   "name": "medium-this",
-  "version": "0.1.0",
+  "version": "0.1.0.beta",
   "description": "A Chrome extension to save URLs and page content as drafts to your Medium Blog",
   "dependencies": {},
   "devDependencies": {
@@ -16,11 +16,10 @@
     "gulp-rename": "^1.2.2",
     "gulp-rev": "^7.1.2",
     "gulp-slack": "^0.1.2",
-    "gulp-uglify": "^3.0.0",
+    "gulp-uglify": "^2.1.2",
     "gulp-usemin": "^0.3.28",
     "gulp-util": "^3.0.8",
-    "gulp-watch": "^4.3.11",
-    "uglify-es": "^3.0.11"
+    "gulp-watch": "^4.3.11"
   },
   "scripts": {},
   "keywords": [

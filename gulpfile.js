@@ -61,10 +61,10 @@ let minh = () => {
  * - The actual build pipeline that clears a target, compiles views, copies images and fonts, minifies and cleans up
  */
 let build = async () => {
-  if (config.target !== 'dev') {
-    console.error('gulp-uglify does not support ES6 yet. Exiting...')
-    return;
-  }
+  // if (config.target !== 'dev') {
+  //   console.error('gulp-uglify does not support ES6 yet. Exiting...')
+  //   return;
+  // }
   await del([config.buildPath + '**/*']);
   let c = await copyResources([
     {
@@ -92,7 +92,8 @@ let build = async () => {
   // Stage and Prod have single JS and CSS so we can clean up the unminified files
   if (config.target !== 'dev') {
     await minh();
-    //c = await del([config.buildPath + '/js', config.buildPath + '/css']);
+    // Cleanup temporary CSS created prior to minification (JS will happen after UglifyJS supports ES6)
+    c = await del([config.buildPath + '/css']);
   }
   return c;
 }
@@ -125,10 +126,11 @@ gulp.task('watch', function () {
   return watch('src/**/*', function () {
     build()
       .then(result => {
-        gulp.start('deploy');
+        gulp.start('build');
       })
   });
 });
+
 
 /** 
  * HELP
@@ -150,11 +152,13 @@ gulp.task('help', function () {
   `)
 });
 
+
 /**
  * DEFAULT
  * - Show the help message
  */
 gulp.task('default', ['help']);
+
 
 /**
  * Set up the config object defaults based on --target flag

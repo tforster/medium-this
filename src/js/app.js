@@ -26,14 +26,17 @@ class App {
       let btnReset = document.getElementById('btnReset');
 
       // Set initial field values
-      // Todo: add the other fields including publishStatus, tags and notification
       txtUserId.value = self.settings.userId;
       txtAccessToken.value = self.settings.accessToken;
+      document.querySelector('#notifyFollowers').checked = self.settings.notifyFollowers;
+      document.querySelector(`input[value="${self.settings.publishStatus}"]`).checked = true
 
       // Bind Save button
       btnSave.addEventListener('click', () => {
         self.settings.userId = txtUserId.value;
         self.settings.accessToken = txtAccessToken.value;
+        self.settings.notifyFollowers = document.querySelector('#notifyFollowers').checked;
+        self.settings.publishStatus = document.querySelector('input[name="publishStatus"]:checked').value;
 
         self.settingsClass.save()
           .then(results => {
@@ -68,8 +71,8 @@ class App {
       });
     }
 
-    // Popup Page
-    this.popupPage = () => {
+    // Extension Page
+    this.extensionPage = () => {
       // Cache oft used DOM elements
       let txtTitle = document.getElementById('title');
       let txtSelection = document.getElementById('selection');
@@ -84,13 +87,18 @@ class App {
           // Update UI
           txtTitle.value = post.page.title;
           txtSelection.innerHTML = post.page.selection;
+          document.querySelector('#notifyFollowers').checked = self.settings.notifyFollowers;
+          document.querySelector(`input[value="${self.settings.publishStatus}"]`).checked = true
 
           // Bind buttons
           btnSave.addEventListener('click', () => {
             post.page.title = txtTitle.value;
             post.page.selection = txtSelection.innerHTML;
-            
-            post.saveToMedium(self.settings.userId,self.settings.accessToken)
+            post.page.tags = document.getElementById('tags').value.split(',');
+            post.page.notifyFollowers = document.querySelector('#notifyFollowers').checked;
+            post.page.publishStatus = document.querySelector('input[name="publishStatus"]:checked').value; // Todo: refactor to use Id
+
+            post.saveToMedium(self.settings.userId, self.settings.accessToken)
               .then(() => {
                 window.close();
               })
@@ -110,7 +118,7 @@ class App {
         })
         .catch(reason => {
           console.log('PromiseAll reason', reason);
-          renderStatus(reason);
+          self.status(reason);
         })
     }
 
@@ -120,10 +128,20 @@ class App {
   status(str) {
     document.getElementById('status').innerHTML = document.getElementById('status').innerHTML + '<br/><br/>' + (typeof (str) === 'object' ? JSON.stringify(str) : str);
   }
-
-
 }
 
 window.addEventListener('DOMContentLoaded', () => {
   new App();
 });
+
+(function (i, s, o, g, r, a, m) {
+  i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+    (i[r].q = i[r].q || []).push(arguments)
+  }, i[r].l = 1 * new Date(); a = s.createElement(o),
+    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+ga('create', 'UA-100340642-2', 'auto');
+ga('set', 'checkProtocolTask', function () { }); // Removes failing protocol check. @see: http://stackoverflow.com/a/22152353/1958200
+ga('require', 'displayfeatures');
+ga('send', 'pageview', '/' + document.querySelector('html').id);
